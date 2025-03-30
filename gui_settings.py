@@ -6,7 +6,7 @@ import pyautogui
 class GuiSettings:
     ONE_TIME_COUNT: ClassVar[int] = 0  # helps with one-time actions
 
-    def __init__(self, pct: float = 0.5):
+    def __init__(self, pct: float = 0.5, multiple_of:int = 100):
         """Initialize the game's settings."""
         # Screen settings
 
@@ -21,8 +21,8 @@ class GuiSettings:
             print(f'ratios: height: {ratio_height:.2f}, width: {ratio_width:.2f}')
 
         # round scaled width and height to multiple of 100
-        scaled_width: int = int((device_width * self.screenPct // 100) * 100)
-        scaled_height: int = int((device_height * self.screenPct // 100) * 100)
+        scaled_width: int = int((device_width * self.screenPct // multiple_of) * multiple_of)
+        scaled_height: int = int((device_height * self.screenPct // multiple_of) * multiple_of)
         if GuiSettings.ONE_TIME_COUNT == 0:
             print(f'scaled width: {scaled_width}, height: {scaled_height}')
 
