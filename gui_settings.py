@@ -1,12 +1,13 @@
 from typing import ClassVar
+
 import pyautogui
-# import pygame as pg
 
 
 class GuiSettings:
     ONE_TIME_COUNT: ClassVar[int] = 0  # helps with one-time actions
 
-    def __init__(self, pct: float = 0.5, multiple_of:int = 100):
+
+    def __init__(self, pct: float = 0.5, multiple_of: int = 100):
         """Initialize the game's settings."""
         # Screen settings
 

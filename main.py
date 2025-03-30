@@ -5,6 +5,7 @@ import pyautogui as pg
 from PySide6.QtCore import QSize
 from PySide6.QtWidgets import QApplication, QWidget
 
+from SimpleWindow import SimpleWindow
 from gui_settings import GuiSettings
 
 scaled_settings = GuiSettings(pct = 0.45, multiple_of = 10)
@@ -15,16 +16,14 @@ def get_python_version() -> str:
     return f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}'
 
 
-def create_simple_window(title: str) -> None:
+def create_simple_window(title: str, qsz = None) -> None:
     # You need one (and only one) QApplication instance per application.
     # Pass in sys.argv to allow command line arguments for your app.
     # If you know you won't use command line arguments QApplication([]) works too.
     app = QApplication(sys.argv)
 
     # Create a Qt widget, which will be our window.
-    window = QWidget()
-    window.setFixedSize(scaled_size)
-    window.setWindowTitle(f'{title}  ({scaled_size.width()} x {scaled_size.height()})')
+    window = SimpleWindow(title, scaled_size)
     window.show()  # IMPORTANT!!!!! Windows are hidden by default.
 
     # Start the event loop.
@@ -35,7 +34,8 @@ def create_simple_window(title: str) -> None:
 
 
 def main():
-    create_simple_window('Simple Window')
+    title: str = f'Simple Window using python {get_python_version()}'
+    create_simple_window(title)
 
 
 if __name__ == '__main__':
