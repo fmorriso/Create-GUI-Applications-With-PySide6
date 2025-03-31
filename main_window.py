@@ -1,5 +1,5 @@
-#from PyQt6.QtWidgets.QWidget import window
-from PySide6.QtCore import QSize, QRect
+from PySide6.QtCore import QSize
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QMainWindow, QPushButton
 
 
@@ -11,33 +11,45 @@ class MainWindow(QMainWindow):
         self.setFixedSize(scaled_size)
         self.scaled_size = scaled_size
 
-        button_width: int = scaled_size.width() // 10
-        button_height: int = scaled_size.height() // 10
+        button_width: int = scaled_size.width() // 8
+        button_height: int = scaled_size.height() // 8
 
         button = QPushButton('Press Me!', self)
         button.setFixedSize(button_width, button_height)
         button.setStyleSheet(self.get_button_color_style())
 
+        font_family: str = self.font().family()
+        print(f'{font_family=}')
+        font_size: int = self.font().pointSize()
+        print(f'{font_size=}')
+        button.setFont(QFont(font_family, font_size * 2))
+
         button.show()
         self.button = button
+        self.window_font = self.font()
 
         self.setCentralWidget(button)
 
+
     def get_button_color_style(self) -> str:
         normal_background = 'red'
+        hover_background = 'blue'
+        pressed_background = 'green'
+        font_size = self.font().pointSize() * 8
         return f"""
             QPushButton {{
-                background-color: {normal_background}; color: white; font-size: 2rem;border: 2px solid black; 
+                background-color: {normal_background}; color: white; border: 2px solid black; 
         border-radius: 5px;      
             }}
             QPushButton:hover {{
-                background-color: blue; color: white; font-size: 2rem; border: 2px solid red;  
+                background-color: {hover_background}; color: white; border: 2px solid red;  
         border-radius: 5px;      
             }}
             QPushButton:pressed {{
-                background-color: green; color: yellow; font-size: 2rem; border: 2px solid blue;
+                background-color: {pressed_background}; color: yellow; border: 2px solid blue;
             }}
         """
+
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
