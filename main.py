@@ -3,10 +3,11 @@ import sys
 import PySide6.QtCore
 import pyautogui as pg
 from PySide6.QtCore import QSize
-from PySide6.QtWidgets import QApplication, QWidget
+from PySide6.QtWidgets import QApplication
 
 from SimpleWindow import SimpleWindow
 from gui_settings import GuiSettings
+from string_builder import StringBuilder
 
 scaled_settings = GuiSettings(pct = 0.45, multiple_of = 10)
 scaled_size = QSize(scaled_settings.screen_width, scaled_settings.screen_height)
@@ -14,6 +15,15 @@ scaled_size = QSize(scaled_settings.screen_width, scaled_settings.screen_height)
 
 def get_python_version() -> str:
     return f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}'
+
+
+def get_window_title(base_title: str) -> str:
+    sbr = StringBuilder(base_title)
+    sbr.append(f' using python {get_python_version()}')
+    sbr.append(f', PySide6 version: {PySide6.__version__}')
+    sbr.append(f', Qt version: {PySide6.QtCore.__version__}')
+    sbr.append(f', PyAutoGUI version: {pg.__version__}')
+    return sbr.to_string()
 
 
 def create_simple_window(title: str, qsz = None) -> None:
@@ -34,8 +44,7 @@ def create_simple_window(title: str, qsz = None) -> None:
 
 
 def main():
-    title: str = f'Simple Window using python {get_python_version()}'
-    create_simple_window(title)
+    create_simple_window(get_window_title('Simple Window'))
 
 
 if __name__ == '__main__':
