@@ -12,9 +12,10 @@ Some examples from the Book ```Create GUI Applications with Python & QT6 (PySide
 * [QColorConstants](https://doc.qt.io/qt-6/qcolorconstants.html)
 ## History
 
-| Date       | Description                           |
-|:-----------|:--------------------------------------|
-| 2025-03-30 | Initial creation                      |
+| Date       | Description                   |
+|:-----------|:------------------------------|
+| 2025-03-30 | Initial creation              |
+| 2025-03-31 | refactor main window creation |
 
 
 
