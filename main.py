@@ -5,7 +5,8 @@ import pyautogui as pg
 from PySide6.QtCore import QSize
 from PySide6.QtWidgets import QApplication
 
-from SimpleWindow import SimpleWindow
+from main_window import MainWindow
+from simple_window import SimpleWindow
 from gui_settings import GuiSettings
 from string_builder import StringBuilder
 
@@ -43,8 +44,20 @@ def create_simple_window(title: str, qsz = None) -> None:
     # loop has stopped.
 
 
+def create_main_window(title: str) -> None:
+    app = QApplication(sys.argv)
+
+    # Create a Qt widget, which will be our window.
+    window = MainWindow(title, scaled_size)
+    window.show()  # IMPORTANT!!!!! Windows are hidden by default.
+
+    # Start the event loop.
+    sys.exit(app.exec())
+
+
 def main():
-    create_simple_window(get_window_title('Simple Window'))
+    # create_simple_window(get_window_title('Simple Window'))
+    create_main_window(get_window_title('Main Window'))
 
 
 if __name__ == '__main__':
