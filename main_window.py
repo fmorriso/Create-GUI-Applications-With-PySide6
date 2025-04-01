@@ -1,5 +1,5 @@
 from PySide6.QtCore import QSize
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QPalette, QColor
 from PySide6.QtWidgets import QMainWindow, QPushButton
 
 
@@ -26,18 +26,19 @@ class MainWindow(QMainWindow):
         normal_background = 'red'
         hover_background = 'blue'
         pressed_background = 'green'
+        text_color = 'white'
         # font_size = self.font().pointSize() * 8
         return f"""
             QPushButton {{
-                background-color: {normal_background}; color: white; border: 2px solid black; 
+                background-color: {normal_background}; color: {text_color}; border: 2px solid black; 
         border-radius: 5px;      
             }}
             QPushButton:hover {{
-                background-color: {hover_background}; color: white; border: 2px solid red;  
+                background-color: {hover_background}; color: {text_color}; border: 2px solid red;  
         border-radius: 5px;      
             }}
             QPushButton:pressed {{
-                background-color: {pressed_background}; color: yellow; border: 2px solid blue;
+                background-color: {pressed_background}; color: {text_color}; border: 2px solid blue;
             }}
         """
 
@@ -57,8 +58,14 @@ class MainWindow(QMainWindow):
     def get_click_me_button(self) -> QPushButton:
         button = QPushButton('Press Me!', self)
         button.setFixedSize(self.button_width, self.button_height)
-        button.setStyleSheet(self.get_button_color_style())
 
+        button.setStyleSheet(self.get_button_color_style())
+        palette = button.palette()
+        palette.setColor(QPalette.Button, QColor('red')) # background
+        palette.setColor(QPalette.ButtonText, QColor('white')) # text color
+        button.setPalette(palette)
+
+        # adjust the font size of the button
         font_family: str = self.font().family()
         print(f'{font_family=}')
         font_size: int = self.font().pointSize()
