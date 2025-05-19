@@ -1,13 +1,14 @@
 import sys
+from importlib.metadata import version
 
 import PySide6.QtCore
 import pyautogui as pg
 from PySide6.QtCore import QSize
 from PySide6.QtWidgets import QApplication
 
+from gui_settings import GuiSettings
 from main_window import MainWindow
 from simple_window import SimpleWindow
-from gui_settings import GuiSettings
 from string_builder import StringBuilder
 
 scaled_settings = GuiSettings(pct = 0.45, multiple_of = 10)
@@ -16,6 +17,10 @@ scaled_size = QSize(scaled_settings.screen_width, scaled_settings.screen_height)
 
 def get_python_version() -> str:
     return f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}'
+
+
+def get_package_version(package_name: str) -> str:
+    return version(package_name)
 
 
 def get_window_title(base_title: str) -> str:
@@ -63,7 +68,10 @@ def main():
 if __name__ == '__main__':
     msg = f'Python version: {get_python_version()}'
     print(msg)
-    print(f'PySide6 version: {PySide6.__version__}')
+    # print(f'PySide6 version: {PySide6.__version__}')
+    print(f'PySide6 version: {get_package_version("pyside6")}')
     print(f'Qt version: {PySide6.QtCore.__version__}')
-    print(f'PyAutoGUI version: {pg.__version__}')
+    # print(f'PyAutoGUI version: {pg.__version__}')
+    print(f'PyAutoGUI version: {get_package_version("PyAutoGUI")}')
+
     main()

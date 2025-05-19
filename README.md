@@ -22,12 +22,12 @@ Some examples from the Book ```Create GUI Applications with Python & QT6 (PySide
 ## Tools Used
  | Tool      |  Version |
  |:----------|---------:|
- | Python    |   3.13.2 |
- | PySide6   |    6.8.3 |
- | Qt        |    6.8.3 |
+ | Python    |   3.13.3 |
  | PyAutoGUI |   0.9.54 |
- | VSCode    |   1.98.2 |
- | PyCharm   | 2024.3.5 |
+ | PySide6   |    6.9.0 |
+ | Qt        |    6.9.0 |
+ | VSCode    |  1.100.2 |
+ | PyCharm   | 2025.1.1 |
  
 ## Example Console Output
 ```text
